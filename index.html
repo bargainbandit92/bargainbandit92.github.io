@@ -1,65 +1,144 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BargainBandit deals</title>
-<meta name="description" content="BargainBandit: short videos of verified Amazon and store deals and promo codes.">
+<title>BargainBandit · Deals</title>
+<meta name="description" content="Daily Amazon and store deals - stolen prices, verified before we post.">
+<meta property="og:title" content="BargainBandit"><meta property="og:description" content="Daily Amazon and store deals - stolen prices, verified before we post.">
+<meta property="og:image" content="https://bargainbandit92.github.io/assets/host.webp"><meta name="theme-color" content="#0d0d0f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;800&family=Special+Elite&display=swap">
 <style>
-  :root { --bg:#f4f6f9; --card:#fff; --ink:#132238; --accent:#e8651a; --muted:#5b6474; --line:#e3e7ee; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#0d1420; --card:#172233; --ink:#eef2f7; --muted:#9aa5b5; --line:#24324a; } }
-  * { box-sizing: border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  header { background:#132238; color:#fff; padding:22px 16px; text-align:center; }
-  header a { color:#fff; text-decoration:none; }
-  header h1 { margin:0; font-size:28px; letter-spacing:.2px; }
-  header p { margin:6px 0 0; opacity:.8; font-size:14px; }
-  .social { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:12px; }
-  .social a { font-size:13px; padding:5px 12px; border:1px solid rgba(255,255,255,.35); border-radius:999px; }
-  main { max-width:620px; margin:0 auto; padding:16px; }
-  .deals { display:grid; gap:12px; }
-  .deal { display:block; background:var(--card); border-radius:14px; padding:14px 16px; text-decoration:none; color:inherit;
-          border-left:5px solid var(--accent); }
-  .tag { color:var(--accent); font-weight:800; } .name { margin:4px 0 6px; }
-  .code b { font-family:Consolas, monospace; background:#fff4e8; color:#132238; padding:2px 8px; border-radius:6px; }
-  .meta { color:var(--muted); font-size:13px; margin-top:6px; }
-  article { background:var(--card); border-radius:14px; padding:8px 22px 22px; }
-  article h2 { font-size:19px; margin:22px 0 6px; } article p, article li { color:var(--ink); }
-  article .updated { color:var(--muted); font-size:14px; }
-  footer { color:var(--muted); font-size:13px; text-align:center; padding:14px 16px 36px; max-width:620px; margin:0 auto; }
-  footer a { color:var(--muted); }
+:root { --ink:#0d0d0f; --ink2:#18181c; --orange:#ff6a13; --paper:#efe4cc; --paper2:#e2d3b1; --red:#cf2a2a;
+        --mute:#8d8a83; --text:#f2efe8; }
+* { box-sizing:border-box; }
+html { background:var(--ink); }
+body { margin:0; color:var(--text); font:16px/1.5 Archivo, system-ui, sans-serif;
+  background:var(--ink) radial-gradient(circle at 20% -10%, #2a1606 0, transparent 45%); min-height:100vh; }
+a { color:inherit; }
+.bar { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px;
+  max-width:980px; margin:0 auto; }
+.logo { font:28px/1 Anton, Impact, sans-serif; letter-spacing:.5px; text-decoration:none; text-transform:uppercase; }
+.logo span { color:var(--orange); }
+.bar nav { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+.bar nav a { font:600 13px Archivo; text-decoration:none; padding:6px 10px; border:2px solid #34343a; border-radius:4px; }
+@media (max-width:480px) { .logo { font-size:22px; } .bar nav { gap:5px; } .bar nav a { padding:4px 7px; font-size:11px; } }
+.bar nav a:hover { border-color:var(--orange); color:var(--orange); }
+
+/* WANTED poster */
+.poster { max-width:980px; margin:8px auto 28px; padding:0 16px; display:grid; gap:24px; align-items:center; }
+@media (min-width:760px) { .poster { grid-template-columns: 380px 1fr; } }
+.paper { background:var(--paper); color:#2a1d10; padding:18px 18px 22px; transform:rotate(-1.5deg);
+  box-shadow: 0 18px 40px rgba(0,0,0,.55), inset 0 0 60px rgba(120,80,30,.25); text-align:center;
+  border:1px solid #c9b48a; position:relative; }
+.paper::before, .paper::after { content:""; position:absolute; top:-10px; width:70px; height:22px;
+  background:rgba(255,106,19,.85); }
+.paper::before { left:18px; transform:rotate(-8deg); } .paper::after { right:18px; transform:rotate(7deg); }
+.wanted { font:76px/0.9 Anton, Impact, sans-serif; letter-spacing:4px; margin:6px 0 0; color:#1d140a; }
+.for { font:15px "Special Elite", monospace; letter-spacing:1px; margin:4px 0 12px; text-transform:uppercase; }
+.mug { background:#2a2a2a; border:6px solid #2a1d10; aspect-ratio: 1 / 1.02; overflow:hidden; }
+.mug img { width:100%; height:100%; object-fit:cover; object-position:50% 0; display:block;
+  filter: sepia(.35) contrast(1.08) saturate(.9); }
+.alias { font:44px/1 Anton, Impact, sans-serif; margin:14px 0 2px; letter-spacing:1px; text-transform:uppercase; }
+.reward { font:15px "Special Elite", monospace; margin:6px 0 0; }
+.reward b { background:#1d140a; color:var(--paper); padding:2px 8px; }
+.pitch h1 { font:clamp(44px, 9vw, 86px)/0.92 Anton, Impact, sans-serif; text-transform:uppercase; margin:0; }
+.pitch h1 em { font-style:normal; color:var(--orange); }
+.pitch p { color:#c9c5bd; font-size:18px; max-width:460px; }
+
+/* Price tags */
+.section { max-width:980px; margin:0 auto; padding:0 16px; }
+.label { display:inline-block; font:22px Anton, Impact, sans-serif; letter-spacing:1px; text-transform:uppercase;
+  background:var(--orange); color:var(--ink); padding:4px 14px; transform:rotate(-1deg); margin:6px 0 16px; }
+.tags { display:grid; gap:18px; }
+@media (min-width:700px) { .tags { grid-template-columns:1fr 1fr; } }
+.tag { position:relative; display:block; text-decoration:none; color:#21160b; background:var(--paper);
+  padding:20px 20px 18px 34px; border-radius:6px 18px 18px 6px; box-shadow:0 10px 26px rgba(0,0,0,.45); }
+.tag::before { content:""; position:absolute; left:13px; top:24px; width:11px; height:11px; border-radius:50%;
+  background:var(--ink); box-shadow:0 0 0 3px var(--paper2); }
+.tags .tag:nth-child(odd) { transform:rotate(-.6deg); } .tags .tag:nth-child(even) { transform:rotate(.5deg); }
+.tag:hover { outline:3px solid var(--orange); }
+.store { font:600 12px Archivo; letter-spacing:1.5px; text-transform:uppercase; color:#6b5a40; }
+.prices { display:flex; align-items:baseline; gap:12px; margin:2px 0 4px; flex-wrap:wrap; }
+.now { font:52px/1 Anton, Impact, sans-serif; color:#140d06; }
+.was { font:600 20px Archivo; color:var(--red); text-decoration:line-through 3px; }
+.name { font:600 16px/1.35 Archivo; margin:6px 0 12px; }
+.stamp { position:absolute; right:14px; top:14px; transform:rotate(12deg); font:26px/1 Anton, Impact, sans-serif;
+  color:var(--red); border:3px solid var(--red); border-radius:6px; padding:4px 8px; opacity:.9;
+  mix-blend-mode:multiply; }
+.code { display:inline-block; font:17px "Special Elite", monospace; background:#21160b; color:var(--paper);
+  padding:4px 10px; letter-spacing:1px; }
+.grab { display:flex; justify-content:space-between; align-items:center; margin-top:14px; gap:10px; }
+.grab b { font:18px Anton, Impact, sans-serif; letter-spacing:1px; background:var(--orange); color:var(--ink);
+  padding:6px 14px; border-radius:4px; text-transform:uppercase; }
+.checked { font:12px Archivo; color:#7a6a52; }
+.old .tag { filter: grayscale(.85) brightness(.82); }
+.old .tag::after { content:"MAY BE EXPIRED"; position:absolute; right:14px; bottom:58px; font:13px Anton, sans-serif;
+  letter-spacing:1px; color:#5a4a33; }
+.empty { color:#c9c5bd; }
+
+/* Legal pages */
+.doc { max-width:760px; margin:10px auto 0; padding:0 16px; }
+.doc article { background:var(--paper); color:#21160b; padding:22px 24px 26px; box-shadow:0 18px 40px rgba(0,0,0,.5); }
+.doc h1 { font:46px/1 Anton, Impact, sans-serif; text-transform:uppercase; margin:6px 0 4px; }
+.doc h2 { font:22px Anton, Impact, sans-serif; text-transform:uppercase; letter-spacing:.5px; margin:24px 0 4px; }
+.doc .updated { font:14px "Special Elite", monospace; color:#6b5a40; margin:0 0 10px; }
+.doc a { color:#9a3a00; }
+
+footer { max-width:980px; margin:44px auto 0; padding:22px 16px 40px; border-top:1px solid #2a2a30;
+  color:var(--mute); font-size:13px; }
+footer nav { display:flex; gap:16px; flex-wrap:wrap; margin-top:10px; }
+footer a { color:#c9c5bd; }
 </style></head><body>
-<header><a href="index.html"><h1>BargainBandit</h1></a><p>Daily Amazon and store deals, with promo codes when there are any</p><div class="social"><a href="https://www.youtube.com/@bargainbandit_92" rel="noopener" target="_blank">YouTube</a><a href="https://www.instagram.com/bargainbandit92/" rel="noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/profile.php?id=1398319930031197" rel="noopener" target="_blank">Facebook</a></div></header>
-<main><div class="deals">
-      <a class="deal" href="https://www.bestbuy.com/product/hisense-65-class-u6-series-mini-led-4k-uhd-qled-smart-google-tv-2024/J3Z9Z422Y3/sku/6576999?sb_share_source=PDP&amp;ref=app_pdp&amp;loc=screenshot_modal" rel="nofollow sponsored noopener" target="_blank">
-        <div class="tag">Best Buy · Save $424</div>
-        <div class="name">Hisense - 65&quot; Class U6 Series Mini-LED 4K QLED Smart Google TV (2024)</div>
-        <div class="code">No code needed</div>
-        <div class="meta">$105.99 · checked Oct 27, 09:35 AM CT</div>
-      </a>
-      <a class="deal" href="https://www.amazon.com/dp/B0FW55KL3Y" rel="nofollow sponsored noopener" target="_blank">
-        <div class="tag">Amazon · Sale</div>
-        <div class="name">2026 Smart Ring New Health Tracker, IP68 Waterproof, iOS/Android Compatible, Sleep…</div>
-        <div class="code">No code needed</div>
-        <div class="meta">$48.99 · checked Oct 27, 09:35 AM CT</div>
-      </a>
-      <a class="deal" href="https://www.amazon.com/dp/B0F82HR8QZ" rel="nofollow sponsored noopener" target="_blank">
-        <div class="tag">Amazon · Sale</div>
-        <div class="name">UGREEN FineTrack Air Tracker Tags (iOS Only) 4 Pack Key Finder</div>
-        <div class="code">No code needed</div>
-        <div class="meta">$19.96 · checked Oct 27, 09:35 AM CT</div>
-      </a>
-      <a class="deal" href="https://www.amazon.com/dp/B0H4W5CFTR" rel="nofollow sponsored noopener" target="_blank">
-        <div class="tag">Amazon · Sale</div>
-        <div class="name">Hybrid Active Noise Cancelling Headphones 120H Playtime Wireless Headphones Bluetooth 6.0…</div>
-        <div class="code">No code needed</div>
-        <div class="meta">$99.99 · checked Oct 27, 09:35 AM CT</div>
-      </a>
-      <a class="deal" href="https://www.amazon.com/dp/B0GVTPKJVT" rel="nofollow sponsored noopener" target="_blank">
-        <div class="tag">Amazon · Sale</div>
-        <div class="name">Amazon Fire HD 10 tablet, built for relaxation, 10.1&quot; vibrant Full HD screen, octa-core…</div>
-        <div class="code">No code needed</div>
-        <div class="meta">$72.99 · checked Oct 27, 09:35 AM CT</div>
-      </a></div></main>
-<footer>Prices and codes are accurate when we check them and can change or expire at any time. Our video host is
-AI-generated. BargainBandit may earn a commission from some links in the future; this page will say so when it does.<br>
-<a href="index.html">Deals</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a> ·
-<a href="mailto:bargainbandit92@gmail.com">bargainbandit92@gmail.com</a></footer>
+<header class="bar"><a class="logo" href="index.html">Bargain<span>Bandit</span></a><nav><a href="https://www.youtube.com/@bargainbandit_92" rel="noopener" target="_blank">YouTube</a><a href="https://www.instagram.com/bargainbandit92/" rel="noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/profile.php?id=1398319930031197" rel="noopener" target="_blank">Facebook</a></nav></header>
+<section class="poster">
+  <div class="paper">
+    <p class="wanted">WANTED</p>
+    <p class="for">for stealing prices</p>
+    <div class="mug"><img src="assets/host.webp" alt="Bargain Bandit, the channel's AI-generated host" width="686" height="720"></div>
+    <p class="alias">Bargain Bandit</p>
+    <p class="reward">REWARD: <b>5 deals</b> · Oct 27</p>
+  </div>
+  <div class="pitch">
+    <h1>Prices <em>stolen</em> daily.</h1>
+    <p>Amazon and store deals, checked before we post. Tap a tag to grab it before the store wises up.</p>
+  </div>
+</section><section class="section"><h2 class="label">Today's Heist</h2><div class="tags">
+    <a class="tag" href="https://www.bestbuy.com/product/hisense-65-class-u6-series-mini-led-4k-uhd-qled-smart-google-tv-2024/J3Z9Z422Y3/sku/6576999?sb_share_source=PDP&amp;ref=app_pdp&amp;loc=screenshot_modal" rel="nofollow sponsored noopener" target="_blank"><span class="stamp">-80%</span>
+      <div class="store">Best Buy</div>
+      <div class="prices"><span class="now">$105.99</span><span class="was">$529.99</span></div>
+      <div class="name">Hisense - 65&quot; Class U6 Series Mini-LED 4K QLED Smart Google TV (2024)</div>
+      <span class="code">No code needed</span>
+      <div class="grab"><span class="checked">Checked Oct 27, 9:35 AM CT</span><b>Grab it →</b></div>
+    </a>
+    <a class="tag" href="https://www.amazon.com/dp/B0FW55KL3Y" rel="nofollow sponsored noopener" target="_blank"><span class="stamp">-18%</span>
+      <div class="store">Amazon</div>
+      <div class="prices"><span class="now">$48.99</span><span class="was">$59.96</span></div>
+      <div class="name">2026 Smart Ring New Health Tracker, IP68 Waterproof, iOS/Android Compatible, Sleep…</div>
+      <span class="code">No code needed</span>
+      <div class="grab"><span class="checked">Checked Oct 27, 9:35 AM CT</span><b>Grab it →</b></div>
+    </a>
+    <a class="tag" href="https://www.amazon.com/dp/B0F82HR8QZ" rel="nofollow sponsored noopener" target="_blank"><span class="stamp">-17%</span>
+      <div class="store">Amazon</div>
+      <div class="prices"><span class="now">$19.96</span><span class="was">$23.99</span></div>
+      <div class="name">UGREEN FineTrack Air Tracker Tags (iOS Only) 4 Pack Key Finder</div>
+      <span class="code">No code needed</span>
+      <div class="grab"><span class="checked">Checked Oct 27, 9:35 AM CT</span><b>Grab it →</b></div>
+    </a>
+    <a class="tag" href="https://www.amazon.com/dp/B0H4W5CFTR" rel="nofollow sponsored noopener" target="_blank">
+      <div class="store">Amazon</div>
+      <div class="prices"><span class="now">$99.99</span></div>
+      <div class="name">Hybrid Active Noise Cancelling Headphones 120H Playtime Wireless Headphones Bluetooth 6.0…</div>
+      <span class="code">No code needed</span>
+      <div class="grab"><span class="checked">Checked Oct 27, 9:35 AM CT</span><b>Grab it →</b></div>
+    </a>
+    <a class="tag" href="https://www.amazon.com/dp/B0GVTPKJVT" rel="nofollow sponsored noopener" target="_blank"><span class="stamp">-53%</span>
+      <div class="store">Amazon</div>
+      <div class="prices"><span class="now">$72.99</span><span class="was">$154.99</span></div>
+      <div class="name">Amazon Fire HD 10 tablet, built for relaxation, 10.1&quot; vibrant Full HD screen, octa-core…</div>
+      <span class="code">No code needed</span>
+      <div class="grab"><span class="checked">Checked Oct 27, 9:35 AM CT</span><b>Grab it →</b></div>
+    </a></div></section>
+<footer>Prices and codes are what we saw when we checked them; stores can change or end them any time, so confirm
+at checkout. Our host is AI-generated. No affiliate links yet; we'll say so on the page when that changes.
+<nav><a href="index.html">Deals</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a>
+<a href="mailto:bargainbandit92@gmail.com">bargainbandit92@gmail.com</a></nav></footer>
 </body></html>
